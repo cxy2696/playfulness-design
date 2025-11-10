@@ -91,6 +91,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: background 0.3s, transform 0.3s;
+            margin-right: 10px;
         }
         button:hover {
             background-color: #4cae4c;
@@ -124,6 +125,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             opacity: 0;
             animation: fadeIn 1s forwards;
+            cursor: pointer;
         }
         .image-gallery img:nth-child(odd) {
             animation-delay: 0.3s;
@@ -150,6 +152,7 @@
             text-align: left;
             opacity: 0;
             animation: fadeInUp 0.5s forwards;
+            transition: background-color 0.3s;
         }
         th {
             background-color: #f2f2f2;
@@ -158,6 +161,10 @@
         tr:nth-child(2) td { animation-delay: 0.4s; }
         tr:nth-child(3) td { animation-delay: 0.6s; }
         tr:nth-child(4) td { animation-delay: 0.8s; }
+        tr:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
         /* Antique-inspired gear animation */
         .gear {
             position: fixed;
@@ -168,10 +175,67 @@
             background: url('https://img.icons8.com/ios/50/000000/gear.png') no-repeat center/contain;
             animation: rotateGear 5s linear infinite;
             opacity: 0.5;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .gear:hover {
+            opacity: 1;
         }
         @keyframes rotateGear {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            animation: zoomIn 0.3s;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        .modal img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* Random fact section */
+        #fact-section {
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        #random-fact {
+            background: #fffacd;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s;
         }
     </style>
 </head>
@@ -202,9 +266,9 @@
     </ul>
     
     <h2>Connections to Antique Automata</h2>
-    <p>The module mentions medieval robots (500-1500 CE) as precursors to playful AI. These automata embodied play through hidden mechanisms, fostering curiosity and ambiguity, much like modern designs. Here's a table comparing concepts:</p>
+    <p>The module mentions medieval robots (500-1500 CE) as precursors to playful AI. These automata embodied play through hidden mechanisms, fostering curiosity and ambiguity, much like modern designs. Here's a table comparing concepts (click rows for highlight):</p>
     
-    <table>
+    <table id="antique-table">
         <tr>
             <th>Module Concept</th>
             <th>Description from Module</th>
@@ -238,19 +302,25 @@
     </table>
     
     <h2>Antique Visual Inspirations</h2>
-    <div class="image-gallery">
-        <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk by Juanelo Turriano">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2rlIL58XRExZ6J8QUkzuDr4FF3WU-VCaoniCFrR_gbhwnFrn-H-7Rk05D2jivDe3jIq0PL7SfoPY1y1iOT8ofWpHVo_uHpI6PG9kzTwZXY_RkkdcHwlfvRTB2HM4v379VmW8gVJvpPNg/w1200-h630-p-k-no-nu/1560s-mechanical-monk.jpg" alt="Mechanical Monk internals">
-        <img src="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" alt="Al-Jazari's Floating Orchestra illustration">
-        <img src="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" alt="Floating Orchestra mechanism">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" alt="Vaucanson’s Digesting Duck">
-        <img src="https://img.atlasobscura.com/trRJJiQtRDir1_tQdnlNBAMdkpXlaiVr7RKdzUHbh_c/rs:fill:300:200:1/g:ce/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy82OTVlNGI3ZTg4/M2I0NzEzOGFfZGln/ZXN0aW5nZHVjay5q/cGc.jpg" alt="Digesting Duck close-up">
-        <img src="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" alt="Silver Swan by James Cox">
-        <img src="https://www.bbc.co.uk/staticarchive/c6b98e4c739d838ea73870d7fa273b56b146b6ee" alt="Silver Swan display">
-        <img src="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" alt="Peacock Clock at Hermitage">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/1200px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" alt="Gilded Peacock Clock">
-        <img src="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" alt="Al-Jazari Peacock Fountain illustration">
-        <img src="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" alt="Reconstructed Peacock Fountain">
+    <p>Click on images for a closer look!</p>
+    <div class="image-gallery" id="antique-gallery">
+        <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk by Juanelo Turriano" data-caption="A clockwork friar that simulates prayer, evoking affection through motion.">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2rlIL58XRExZ6J8QUkzuDr4FF3WU-VCaoniCFrR_gbhwnFrn-H-7Rk05D2jivDe3jIq0PL7SfoPY1y1iOT8ofWpHVo_uHpI6PG9kzTwZXY_RkkdcHwlfvRTB2HM4v379VmW8gVJvpPNg/w1200-h630-p-k-no-nu/1560s-mechanical-monk.jpg" alt="Mechanical Monk internals" data-caption="Internal mechanisms of the Mechanical Monk, showcasing hidden ingenuity.">
+        <img src="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" alt="Al-Jazari's Floating Orchestra illustration" data-caption="Illustration of water-powered musicians on a boat for entertainment.">
+        <img src="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" alt="Floating Orchestra mechanism" data-caption="Detailed mechanism of Al-Jazari's programmable orchestra.">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" alt="Vaucanson’s Digesting Duck" data-caption="The famous duck that mimics digestion, blending ambiguity and interactivity.">
+        <img src="https://img.atlasobscura.com/trRJJiQtRDir1_tQdnlNBAMdkpXlaiVr7RKdzUHbh_c/rs:fill:300:200:1/g:ce/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy82OTVlNGI3ZTg4/M2I0NzEzOGFfZGln/ZXN0aW5nZHVjay5q/cGc.jpg" alt="Digesting Duck close-up" data-caption="Close-up of Vaucanson’s ingenious automaton.">
+        <img src="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" alt="Silver Swan by James Cox" data-caption="The elegant Silver Swan, creating an enchanted zone with its movements.">
+        <img src="https://www.bbc.co.uk/staticarchive/c6b98e4c739d838ea73870d7fa273b56b146b6ee" alt="Silver Swan display" data-caption="Display of the Silver Swan in action.">
+        <img src="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" alt="Peacock Clock at Hermitage" data-caption="The lavish Peacock Clock with animated birds.">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/1200px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" alt="Gilded Peacock Clock" data-caption="Gilded version of the Peacock Clock, full of surprise and delight.">
+        <img src="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" alt="Al-Jazari Peacock Fountain illustration" data-caption="Illustration of the interactive Peacock Fountain.">
+        <img src="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" alt="Reconstructed Peacock Fountain" data-caption="Modern reconstruction of Al-Jazari's Peacock Fountain.">
+    </div>
+    
+    <div id="fact-section">
+        <button onclick="showRandomFact()">Discover Random Antique Fact</button>
+        <div id="random-fact"></div>
     </div>
     
     <h2>Interactive Demo</h2>
@@ -260,15 +330,16 @@
         <label for="memory">Describe a past memory:</label><br>
         <textarea id="memory" placeholder="Type your memory here..."></textarea><br>
         <button onclick="generatePlayfulReminiscence()">Reminisce Playfully</button>
+        <button onclick="clearOutput()">Clear</button>
     </div>
     
     <div id="output"></div>
     
     <h2>Visual Inspirations (Modern)</h2>
-    <div class="image-gallery">
-        <img src="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" alt="VR reminiscence therapy">
-        <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3462734935063464296" alt="MemoryLane AI app">
-        <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3462734934736190719" alt="GenAI for reminiscence">
+    <div class="image-gallery" id="modern-gallery">
+        <img src="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" alt="VR reminiscence therapy" data-caption="Elderly people engaging in VR-based reminiscence therapy.">
+        <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3462734935063464296" alt="MemoryLane AI app" data-caption="Screenshot of the MemoryLane app for fun memory storytelling.">
+        <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3462734934736190719" alt="GenAI for reminiscence" data-caption="Generative AI aiding in reminiscence experiences.">
     </div>
     
     <h2>References</h2>
@@ -283,9 +354,87 @@
     <p>Publish this on GitHub under cxy2696 for access!</p>
     
     <!-- Antique gear element for playful touch -->
-    <div class="gear"></div>
+    <div class="gear" onclick="triggerRandomAnimation()"></div>
+    
+    <!-- Modal for image lightbox -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="">
+            <p id="modalCaption"></p>
+        </div>
+    </div>
     
     <script>
+        // Table row highlight
+        const tableRows = document.querySelectorAll('#antique-table tr:not(:first-child)');
+        tableRows.forEach(row => {
+            row.addEventListener('click', () => {
+                row.style.backgroundColor = row.style.backgroundColor === 'rgb(240, 248, 255)' ? '' : '#f0f8ff';
+            });
+        });
+
+        // Image gallery modals for both galleries
+        const galleries = document.querySelectorAll('.image-gallery');
+        galleries.forEach(gallery => {
+            const images = gallery.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('click', () => {
+                    document.getElementById('modalImage').src = img.src;
+                    document.getElementById('modalCaption').textContent = img.dataset.caption || img.alt;
+                    document.getElementById('imageModal').style.display = 'flex';
+                });
+            });
+        });
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('imageModal')) {
+                closeModal();
+            }
+        });
+
+        // Random antique facts
+        const antiqueFacts = [
+            "The Mechanical Monk from 1560 was created to pray continuously, blending faith and mechanics.",
+            "Al-Jazari's inventions in 1206 included programmable automata, early precursors to modern AI.",
+            "Vaucanson’s Digesting Duck amazed 18th-century audiences by simulating eating and digestion.",
+            "The Silver Swan automaton from 1773 still performs in museums, captivating with its graceful motions.",
+            "Peacock clocks used intricate gears to animate birds, evoking wonder and curiosity."
+        ];
+
+        function showRandomFact() {
+            const factDiv = document.getElementById('random-fact');
+            const randomIndex = Math.floor(Math.random() * antiqueFacts.length);
+            factDiv.textContent = antiqueFacts[randomIndex];
+            factDiv.style.display = 'block';
+        }
+
+        // Gear click for random animation (e.g., shake page elements)
+        function triggerRandomAnimation() {
+            document.body.style.animation = 'shake 0.5s';
+            setTimeout(() => { document.body.style.animation = ''; }, 500);
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        // Reminiscence generator
         function generatePlayfulReminiscence() {
             const memory = document.getElementById('memory').value.trim();
             if (!memory) {
@@ -322,6 +471,11 @@
             outputDiv.style.animation = 'none';
             outputDiv.offsetHeight; // Force reflow
             outputDiv.style.animation = 'slideInRight 1s ease-out forwards';
+        }
+
+        function clearOutput() {
+            document.getElementById('output').style.display = 'none';
+            document.getElementById('memory').value = '';
         }
     </script>
 </body>
