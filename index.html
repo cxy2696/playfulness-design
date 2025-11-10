@@ -12,23 +12,48 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
         h1 {
             text-align: center;
             color: #4a90e2;
-            animation: bounce 2s infinite;
+            animation: bounce 2s infinite, colorShift 5s infinite alternate;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
+        @keyframes colorShift {
+            0% { color: #4a90e2; }
+            100% { color: #ff69b4; }
+        }
         h2 {
             color: #2e6da4;
+            position: relative;
+            animation: slideInLeft 1s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         ul {
             list-style-type: disc;
             padding-left: 20px;
+        }
+        ul li {
+            opacity: 0;
+            animation: fadeInUp 0.5s forwards;
+        }
+        ul li:nth-child(1) { animation-delay: 0.2s; }
+        ul li:nth-child(2) { animation-delay: 0.4s; }
+        ul li:nth-child(3) { animation-delay: 0.6s; }
+        ul li:nth-child(4) { animation-delay: 0.8s; }
+        ul li:nth-child(5) { animation-delay: 1s; }
+        ul li:nth-child(6) { animation-delay: 1.2s; }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         #input-section {
             margin: 20px auto;
@@ -37,6 +62,12 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+            50% { box-shadow: 0 6px 12px rgba(74,144,226,0.5); }
+            100% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         }
         textarea {
             width: 100%;
@@ -45,6 +76,11 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             resize: vertical;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
         }
         button {
             background-color: #5cb85c;
@@ -54,10 +90,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
         button:hover {
             background-color: #4cae4c;
+            transform: scale(1.05) rotate(2deg);
         }
         #output {
             margin: 20px auto;
@@ -67,6 +104,11 @@
             border-radius: 10px;
             border: 1px solid #d6e9c6;
             display: none;
+            animation: slideInRight 1s ease-out forwards;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         .image-gallery {
             display: flex;
@@ -79,10 +121,23 @@
             border-radius: 10px;
             margin: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        .image-gallery img:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+        .image-gallery img:nth-child(even) {
+            animation-delay: 0.6s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         .image-gallery img:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
         table {
             width: 100%;
@@ -93,9 +148,30 @@
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            opacity: 0;
+            animation: fadeInUp 0.5s forwards;
         }
         th {
             background-color: #f2f2f2;
+        }
+        tr:nth-child(1) td { animation-delay: 0.2s; }
+        tr:nth-child(2) td { animation-delay: 0.4s; }
+        tr:nth-child(3) td { animation-delay: 0.6s; }
+        tr:nth-child(4) td { animation-delay: 0.8s; }
+        /* Antique-inspired gear animation */
+        .gear {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: url('https://img.icons8.com/ios/50/000000/gear.png') no-repeat center/contain;
+            animation: rotateGear 5s linear infinite;
+            opacity: 0.5;
+        }
+        @keyframes rotateGear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -206,6 +282,9 @@
     
     <p>Publish this on GitHub under cxy2696 for access!</p>
     
+    <!-- Antique gear element for playful touch -->
+    <div class="gear"></div>
+    
     <script>
         function generatePlayfulReminiscence() {
             const memory = document.getElementById('memory').value.trim();
@@ -239,6 +318,10 @@
             const outputDiv = document.getElementById('output');
             outputDiv.innerHTML = story;
             outputDiv.style.display = 'block';
+            // Trigger animation reset for replay
+            outputDiv.style.animation = 'none';
+            outputDiv.offsetHeight; // Force reflow
+            outputDiv.style.animation = 'slideInRight 1s ease-out forwards';
         }
     </script>
 </body>
