@@ -1,1 +1,1 @@
-(website)[https://cxy2696.github.io/playfulness-design/index.html]
+(https://cxy2696.github.io/playfulness-design/index.html)[website]
