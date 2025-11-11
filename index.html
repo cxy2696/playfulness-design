@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playful Antiques</title>
+    <title>Playful AI in Reminiscence: Inspired by Antiques</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f8ff;
             color: #333;
-            margin: 0;
+            max-width: 70%;
+            margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            /*overflow-x: hidden;*/
         }
         h1 {
             text-align: center;
@@ -241,10 +242,9 @@
 </head>
 <body>
     <h1>Playful Antiques</h1>
-    
     <p>Playfulness enhanced with inspirations from antique automata. This could be useful for older adults but I want it be fun for everyone.</p>
     
-    <h2>Design Concept</h2>
+     <h2>Design Concept</h2>
     <p>Transforming user's stories with random elements and antique-inspired twists (e.g., imagining memories as clockwork adventures). It encourages voluntary involvement via "what if" scenarios, adds affection with warm language, and promotes reflection. drawing from medieval automata for added wonder.</p>
     <p>Key Features (Conceptual):</p>
     <ul>
@@ -300,7 +300,7 @@
         </tr>
     </table>
     
-    <h2>Antique Visual Inspirations</h2>
+    <h2>Antique Vision</h2>
     <div class="image-gallery" id="antique-gallery">
         <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk by Juanelo Turriano" data-caption="A clockwork friar that simulates prayer, evoking affection through motion.">
         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2rlIL58XRExZ6J8QUkzuDr4FF3WU-VCaoniCFrR_gbhwnFrn-H-7Rk05D2jivDe3jIq0PL7SfoPY1y1iOT8ofWpHVo_uHpI6PG9kzTwZXY_RkkdcHwlfvRTB2HM4v379VmW8gVJvpPNg/w1200-h630-p-k-no-nu/1560s-mechanical-monk.jpg" alt="Mechanical Monk internals" data-caption="Internal mechanisms of the Mechanical Monk, showcasing hidden ingenuity.">
@@ -321,13 +321,12 @@
         <div id="random-fact"></div>
     </div>
     
-    <h2>Interactive Demo</h2>
-    <p>Try the simulation</p>
-    
+
+    <p>playful twist with optional antique-inspired elements (e.g., clockwork surprises).</p>
     <div id="input-section">
-        <label for="memory">Describe a story:</label><br>
-        <textarea id="memory" placeholder="Type your story here..."></textarea><br>
-        <button onclick="generatePlayfulReminiscence()">Play</button>
+        <label for="memory">Describe a past memory:</label><br>
+        <textarea id="memory" placeholder="Type your memory here..."></textarea><br>
+        <button onclick="generatePlayfulReminiscence()">Reminisce Playfully</button>
         <button onclick="clearOutput()">Clear</button>
     </div>
     
