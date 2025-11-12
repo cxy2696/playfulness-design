@@ -264,7 +264,7 @@
 </head>
 <body>
     <h1>Playful Antiques</h1>
-    <p>Playfulness enhanced with inspirations from antique automata. This could be useful for older adults but I want it be fun for everyone. Updated as of November 2025 with latest on Apple's robotic lamp prototype.</p>
+    <p>Playfulness enhanced with inspirations from antique automata. This could be useful for older adults but I want it be fun for everyone. Updated as of November 12, 2025 with latest on Apple's robotic lamp prototype.</p>
   
     <h2>Design Concept</h2>
     <p>Transforming user's stories with random elements and antique-inspired twists (e.g., imagining memories as clockwork adventures). It encourages voluntary involvement via "what if" scenarios, drawing from medieval automata for added wonder.</p>
@@ -455,11 +455,18 @@
         }
         document.getElementById('fact-button').addEventListener('click', showRandomFact);
         // Gear click for random animation (e.g., shake page elements)
+        let gearClickCount = 0;
         function triggerRandomAnimation() {
             document.body.style.animation = 'shake 0.5s';
             setTimeout(() => { document.body.style.animation = ''; }, 500);
         }
-        document.getElementById('gear-element').addEventListener('click', triggerRandomAnimation);
+        document.getElementById('gear-element').addEventListener('click', () => {
+            gearClickCount++;
+            triggerRandomAnimation();
+            if (gearClickCount === 3) {
+                window.location.href = 'https://cxy2696.github.io/playfulness-design/';
+            }
+        });
         // Reminiscence generator
         function generatePlayfulReminiscence() {
             const memory = document.getElementById('memory').value.trim();
