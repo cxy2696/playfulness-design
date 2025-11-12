@@ -3,152 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playful AI in Reminiscence: Inspired by Antiques</title>
+    <title>Playful AI in Reminiscence: Inspired by Antiques - Presentation</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f8ff;
             color: #333;
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             line-height: 1.6;
         }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .image-gallery img {
-                max-width: 100%;
-            }
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        h1 {
-            text-align: center;
-            color: #4a90e2;
-            animation: bounce 2s infinite, colorShift 5s infinite alternate;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        @keyframes colorShift {
-            0% { color: #4a90e2; }
-            100% { color: #ff69b4; }
-        }
-        h2 {
-            color: #2e6da4;
+        .slide {
+            min-height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+            border-bottom: 2px solid #ccc;
             position: relative;
-            animation: slideInLeft 1s ease-out;
         }
-        @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .slide h1, .slide h2 {
+            color: #2e6da4;
         }
-        ul {
+        .slide ul {
             list-style-type: disc;
             padding-left: 20px;
         }
-        ul li {
-            opacity: 0;
-            animation: fadeInUp 0.5s forwards;
-        }
-        ul li:nth-child(1) { animation-delay: 0.2s; }
-        ul li:nth-child(2) { animation-delay: 0.4s; }
-        ul li:nth-child(3) { animation-delay: 0.6s; }
-        ul li:nth-child(4) { animation-delay: 0.8s; }
-        ul li:nth-child(5) { animation-delay: 1s; }
-        ul li:nth-child(6) { animation-delay: 1.2s; }
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        #input-section {
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            display: block;
             margin: 20px auto;
-            max-width: 600px;
-            background: #fff;
-            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-            50% { box-shadow: 0 6px 12px rgba(74,144,226,0.5); }
-            100% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        textarea:focus {
-            border-color: #4a90e2;
-            outline: none;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s, transform 0.3s;
-            margin-right: 10px;
-        }
-        button:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05) rotate(2deg);
-        }
-        #output {
-            margin: 20px auto;
-            max-width: 600px;
-            background: #dff0d8;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #d6e9c6;
-            display: none;
-            animation: slideInRight 1s ease-out forwards;
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .image-gallery {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        .image-gallery img {
-            max-width: 300px;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            cursor: pointer;
-            will-change: transform;
-        }
-        .image-gallery img:nth-child(odd) {
-            animation-delay: 0.3s;
-        }
-        .image-gallery img:nth-child(even) {
-            animation-delay: 0.6s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .image-gallery img:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
         table {
             width: 100%;
@@ -159,319 +48,181 @@
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
-            opacity: 0;
-            animation: fadeInUp 0.5s forwards;
-            transition: background-color 0.3s;
         }
         th {
             background-color: #f2f2f2;
         }
-        tr:nth-child(1) td { animation-delay: 0.2s; }
-        tr:nth-child(2) td { animation-delay: 0.4s; }
-        tr:nth-child(3) td { animation-delay: 0.6s; }
-        tr:nth-child(4) td { animation-delay: 0.8s; }
-        tr:hover {
-            background-color: #f0f8ff;
-            cursor: pointer;
-        }
-        /* Antique-inspired gear animation */
-        .gear {
+        /* Navigation */
+        .nav {
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: url('https://img.icons8.com/ios/50/000000/gear.png') no-repeat center/contain;
-            animation: rotateGear 5s linear infinite;
-            opacity: 0.5;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 20px;
+        }
+        .nav button {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
             cursor: pointer;
-            transition: opacity 0.3s;
+            border-radius: 5px;
         }
-        .gear:hover {
-            opacity: 1;
-        }
-        @keyframes rotateGear {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 80%;
-            animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-        .modal img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        /* Random fact section */
-        #fact-section {
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: center;
-        }
-        #random-fact {
-            background: #fffacd;
-            padding: 15px;
-            border-radius: 10px;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        /* Shake animation for gear click */
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        .nav button:hover {
+            background: #4cae4c;
         }
     </style>
 </head>
 <body>
-    <h1>Playful Antiques</h1>
-    <p>Playfulness enhanced with inspirations from antique automata. This could be useful for older adults but I want it be fun for everyone.</p>
-   
-    <h2>Design Concept</h2>
-    <p>Transforming user's stories with random elements and antique-inspired twists (e.g., imagining memories as clockwork adventures). It encourages voluntary involvement via "what if" scenarios, drawing from medieval automata for added wonder.</p>
-    <p>Key Features (Conceptual):</p>
-    <ul>
-        <li>Generates personalized stories (e.g., MemoryLane), with antique motifs for surprise.</li>
-        <li>Adapts via emotions (e.g., facial recognition like LONG-REMI) to maintain positive engagement.</li>
-        <li>Incorporates gamified elements like proverb completions or rhythm games, evoking physical/emotional responses.</li>
-        <li>Uses controlled randomness for surprises, fostering curiosity, now inspired by historical mechanisms.</li>
-    </ul>
-   
-    <h2>Playful Elements from the Course</h2>
-    <ul>
-        <li><strong>Openness and Ambiguity:</strong> Memories reimagined with twists, like magical elements or alternate endings.</li>
-        <li><strong>Curiosity and Exploration:</strong> Users explore story branches, akin to pervasive games.</li>
-        <li><strong>Affection and Reflection:</strong> Empathetic responses encourage connections, like affective motion in Pinokio Lamp.</li>
-        <li><strong>Non-Utilitarian Fun:</strong> Focuses on ludic activities, blurring play and life, as in the Drift Table.</li>
-        <li><strong>Mind-Body Push-and-Pull:</strong> Suggests physical actions.</li>
-        <li><strong>Magic Circle:</strong> Creates an enchanted zone for control play, like Brainball or Broncomatic.</li>
-    </ul>
-   
-    <h2>Connections to Antique Automata</h2>
-    <p>The module mentions medieval robots (500-1500 CE) as precursors. These automata embodied play through hidden mechanisms, fostering curiosity and ambiguity, much like modern designs. Here's a table comparing concepts</p>
-   
-    <table id="antique-table">
-        <tr>
-            <th>Module Concept</th>
-            <th>Description from Module</th>
-            <th>Related Antique Example</th>
-            <th>Connection to Playfulness</th>
-        </tr>
-        <tr>
-            <td>Affective + Abstract Robotic Motion</td>
-            <td>As in Pinokio Lamp (2012) and Apple's ELEGNT lamp prototype (2025), subtle movements enhance acceptance.</td>
-            <td>The Mechanical Monk (1560) by Juanelo Turriano: Clockwork friar walks, prays, moves eyes/lips.</td>
-            <td>Evokes affection through lifelike gestures, creating emotional engagement like modern AI motion.</td>
-        </tr>
-        <tr>
-            <td>Ludic Activities (Curiosity, Exploration)</td>
-            <td>Drift Table (2004) supports non-task exploration.</td>
-            <td>Al-Jazari's Floating Orchestra (1206): Water-powered boat with programmable musicians.</td>
-            <td>Promotes exploratory play via surprises, blurring real and mechanical in a "magic circle."</td>
-        </tr>
-        <tr>
-            <td>Mind-Body Push-and-Pull</td>
-            <td>Brainball (2000) contests control for fun.</td>
-            <td>Vaucanson’s Digesting Duck (1739): Eats, "digests" grain into pellets.</td>
-            <td>Interactive feeding evokes ambiguity (alive?), with randomness like immersion in games.</td>
-        </tr>
-        <tr>
-            <td>Magic Circle</td>
-            <td>Draws users into enchanted zones, as in pervasive games.</td>
-            <td>The Silver Swan (1773) by Cox and Merlin: Preens, catches fish, swims with music.</td>
-            <td>Creates reflective zone through affectionate motions, tuning to cultural wonder.</td>
-        </tr>
-        <tr>
-            <td>Openness and Ambiguity</td>
-            <td>Memories reimagined with twists, like magical elements or alternate endings.</td>
-            <td>Jaquet-Droz The Writer (1774): A programmable boy that writes custom messages with fluid motions.</td>
-            <td>Fosters curiosity through "hidden" programming, allowing users to explore endless story variations, much like branching narratives in games.</td>
-        </tr>
-        <tr>
-            <td>Curiosity and Exploration</td>
-            <td>Users explore story branches, akin to pervasive games.</td>
-            <td>The Turk (1770) by Wolfgang von Kempelen: A chess-playing "automaton" (later revealed as a hoax with a hidden operator).</td>
-            <td>Sparks wonder and investigation into its mechanisms, blending deception with playful challenge, encouraging repeated engagement.</td>
-        </tr>
-        <tr>
-            <td>Non-Utilitarian Fun</td>
-            <td>Focuses on ludic activities, blurring play and life.</td>
-            <td>Tipoo's Tiger (1790s): A life-sized automaton of a tiger mauling a European soldier, with sounds and movements.</td>
-            <td>Delivers surprise and delight through dramatic, non-practical spectacle, evoking emotional responses like awe or humor in a historical context.</td>
-        </tr>
-    </table>
-   
-    <h2>Antique Vision</h2>
-    <div class="image-gallery" id="antique-gallery">
-        <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk by Juanelo Turriano" data-caption="A clockwork friar that simulates prayer, evoking affection through motion.">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2rlIL58XRExZ6J8QUkzuDr4FF3WU-VCaoniCFrR_gbhwnFrn-H-7Rk05D2jivDe3jIq0PL7SfoPY1y1iOT8ofWpHVo_uHpI6PG9kzTwZXY_RkkdcHwlfvRTB2HM4v379VmW8gVJvpPNg/w1200-h630-p-k-no-nu/1560s-mechanical-monk.jpg" alt="Mechanical Monk internals" data-caption="Internal mechanisms of the Mechanical Monk, showcasing hidden ingenuity.">
-        <img src="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" alt="Al-Jazari's Floating Orchestra illustration" data-caption="Illustration of water-powered musicians on a boat for entertainment.">
-        <img src="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" alt="Floating Orchestra mechanism" data-caption="Detailed mechanism of Al-Jazari's programmable orchestra.">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" alt="Vaucanson’s Digesting Duck" data-caption="The famous duck that mimics digestion, blending ambiguity and interactivity.">
-        <img src="https://img.atlasobscura.com/trRJJiQtRDir1_tQdnlNBAMdkpXlaiVr7RKdzUHbh_c/rs:fill:300:200:1/g:ce/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy82OTVlNGI3ZTg4/M2I0NzEzOGFfZGln/ZXN0aW5nZHVjay5q/cGc.jpg" alt="Digesting Duck close-up" data-caption="Close-up of Vaucanson’s ingenious automaton.">
-        <img src="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" alt="Silver Swan by James Cox" data-caption="The elegant Silver Swan, creating an enchanted zone with its movements.">
-        <img src="https://www.bbc.co.uk/staticarchive/c6b98e4c739d838ea73870d7fa273b56b146b6ee" alt="Silver Swan display" data-caption="Display of the Silver Swan in action.">
-        <img src="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" alt="Peacock Clock at Hermitage" data-caption="The lavish Peacock Clock with animated birds.">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/1200px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" alt="Gilded Peacock Clock" data-caption="Gilded version of the Peacock Clock, full of surprise and delight.">
-        <img src="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" alt="Al-Jazari Peacock Fountain illustration" data-caption="Illustration of the interactive Peacock Fountain.">
-        <img src="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" alt="Reconstructed Peacock Fountain" data-caption="Modern reconstruction of Al-Jazari's Peacock Fountain.">
-    </div>
-   
-    <div id="fact-section">
-        <button id="fact-button" aria-label="Discover a random antique fact">Discover Random Antique Fact</button>
-        <div id="random-fact"></div>
-    </div>
-   
-    <p>Playful twist with optional antique-inspired elements (e.g., clockwork surprises).</p>
-    <div id="input-section">
-        <label for="memory">Describe a past memory:</label><br>
-        <textarea id="memory" placeholder="Type your memory here..."></textarea><br>
-        <button id="play-button" aria-label="Generate playful reminiscence">Play</button>
-        <button id="clear-button" aria-label="Clear output">Clear</button>
-    </div>
-   
-    <div id="output"></div>
-   
-    <h2>Visual Inspirations (Modern)</h2>
-    <div class="image-gallery" id="modern-gallery">
-        <img src="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" alt="VR reminiscence therapy for elderly" data-caption="Elderly people engaging in VR-based reminiscence therapy.">
-        <img src="https://cdn.mos.cms.futurecdn.net/VNtDpUkSX4Brh8Pq4Ago5i.jpg" alt="Photo reminiscence therapy box" data-caption="Box of old photos used in photo reminiscence therapy for dementia patients.">
-        <img src="https://www.mdpi.com/sustainability/sustainability-11-04792/article_deploy/html/images/sustainability-11-04792-g002.png" alt="Reminiscence therapy system diagram" data-caption="Diagram of a reminiscence therapy system for the elderly using AI.">
-        <img src="https://cdn.prod.website-files.com/67f6d78f0e7aeeb45a55ed34/68de174f693128915187f674_474f0cea-201e-4267-96e9-ccc66794f41b.webp" alt="Cozy setting for reminiscence therapy" data-caption="Cozy living room setting for reminiscence therapy sessions with seniors.">
-    </div>
-   
-    <h2>References</h2>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Automaton">Wikipedia: Automaton - Overview of historical automata and examples.</a></li>
-        <li><a href="https://www.history.com/news/7-early-robots-and-automatons">History.com: 7 Early Robots and Automatons.</a></li>
-        <li><a href="https://www.atlasobscura.com/">Atlas Obscura: Notable automata like Tipoo's Tiger and Jaquet-Droz.</a></li>
-        <li><a href="https://machinelearning.apple.com/research/elegnt-expressive-functional-movement">Apple Machine Learning Research: ELEGNT – Expressive and Functional Movement Design for Non-Anthropomorphic Robots (2025).</a><grok-card data-id="100e22" data-type="citation_card"></grok-card></li>
-        <li><a href="https://techxplore.com/news/2025-02-apple-pixar-table-lamp-ai.html">TechXplore: Apple engineers create expressive Pixar-like table lamp with AI (2025).</a><grok-card data-id="b6e22c" data-type="citation_card"></grok-card></li>
-    </ul>
-   
-    <!-- Antique gear element for playful touch -->
-    <div class="gear" id="gear-element"></div>
-   
-    <!-- Modal for image lightbox -->
-    <div id="imageModal" class="modal">
-        <span class="close" id="close-modal">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="Modal image">
-            <p id="modalCaption"></p>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide" id="slide1">
+            <h1>Playful Antiques</h1>
+            <h2>Enhancing Fun and Reflection in UX Design</h2>
+            <p>Xinyi Cui, INFO6940 2025 FA</p>
+            <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk automaton 1560 Juanelo Turriano">
+        </div>
+
+        <!-- Slide 2: Problem & Concept Overview -->
+        <div class="slide" id="slide2">
+            <h2>Problem & Design Concept</h2>
+            <ul>
+                <li>Reminiscence therapy aids reflection but often feels task-oriented (Woods et al., 2018).</li>
+                <li>My AI web app reimagines memories with random twists (e.g., clockwork adventures), fostering curiosity and non-utilitarian fun.</li>
+                <li>Ties to course: Supports exploration/reflection over defined tasks (Gaver et al., 2004).</li>
+            </ul>
+            <img src="https://www.researchgate.net/publication/265540720/figure/fig12/AS:669445278150667@1536619600881/the-triad-aesthetic-ludic-player-is-strongly-reminiscent-of-Peirces-Trichotomy.jpg" alt="Play vs Game diagram openness ambiguity affection reflection">
+        </div>
+
+        <!-- Slide 3: Quick Demo -->
+        <div class="slide" id="slide3">
+            <h2>Quick Demo</h2>
+            <p>Demo the HTML tool: Input a memory and see the playful antique twist.</p>
+            <div id="input-section">
+                <label for="memory">Describe a past memory:</label><br>
+                <textarea id="memory" placeholder="Type your memory here..."></textarea><br>
+                <button id="play-button">Play</button>
+                <button id="clear-button">Clear</button>
+            </div>
+            <div id="output"></div>
+            <img src="https://supermodel-bestawards.s3.amazonaws.com/migrated/entry/2794/title.jpg?k=34a573dd54" alt="Pinokio Lamp interactive art installation by Shanshan Zhou">
+            <img src="https://supermodel-bestawards.s3.amazonaws.com/migrated/entry/2794/IMG_3593.jpg?k=34a573dd54" alt="Pinokio Lamp in action">
+        </div>
+
+        <!-- Slide 4: Course Week 1 – What is Play? -->
+        <div class="slide" id="slide4">
+            <h2>What is Play?</h2>
+            <ul>
+                <li>Ludic designs: Ambiguity, openness, curiosity (non-utilitarian).</li>
+                <li>Play (UX) vs. Game (system): Focus on reflection/exploration over rules/objectives.</li>
+            </ul>
+            <img src="https://www.researchgate.net/publication/220302227/figure/fig1/AS:393922409975811@1470929829651/The-Drift-Tables-technology.png" alt="Drift Table by William Gaver 2004 ludic design">
+        </div>
+
+        <!-- Slide 5: Course Week 2 – Mind-Body Fun -->
+        <div class="slide" id="slide5">
+            <h2>Mind-Body Fun</h2>
+            <ul>
+                <li>Fun as contesting control: Surrender/looseness (e.g., Broncomatic).</li>
+                <li>Immersion: Body as play</li>
+                <li>Applied: Tool suggests physical actions; adapts to emotions like Brainball.</li>
+            </ul>
+            <img src="https://i.ytimg.com/vi/TL9Njg8i_JQ/hqdefault.jpg" alt="Brainball Interactive Institute Sweden 2000 Sara Ilstedt Hjelm">
+            <img src="https://www.ijdesign.org/public/journals/1/1070/Figure10.jpg" alt="Brainball setup">
+        </div>
+
+        <!-- Slide 6: Course Weeks 3-5 – Social Fun & Magic Circle -->
+        <div class="slide" id="slide6">
+            <h2>Social Fun & Magic Circle</h2>
+            <ul>
+                <li>Cooperation/competition with unwritten rules.</li>
+                <li>Magic circle: Enchanted zone for play (Sniderman, 1999).</li>
+                <li>Applied: Branching stories create pervasive playgrounds, blurring game/IRL (in real life).</li>
+            </ul>
+            <img src="https://images.adsttc.com/media/images/6331/4d69/a153/3e01/6e21/dace/large_jpg/what-is-urban-gamification_1.jpg?1664175486" alt="Urban gamification example colorful city street play">
+        </div>
+
+        <!-- Slide 7: Antique Inspirations & Affective Motion -->
+        <div class="slide" id="slide7">
+            <h2>Antique Inspirations & Affective Motion</h2>
+            <ul>
+                <li>Medieval robots as precursors (500-1500 CE).</li>
+                <li>Affective/abstract motion: Enhances acceptance (Hoffman & Ju, 2014).</li>
+                <li>Applied: Tool uses clockwork motifs for wonder, like Apple's 2025 prototype (targeted 2027 launch).</li>
+            </ul>
+            <img src="x-raw-image:///a026359d8d65f021b6c95247d285efc85be8ae3e646d22330081b2bfae0b61c5" alt="Affective abstract robotic motion diagram Guy Hoffman Wendy Ju 2014">
+            <img src="https://s.yimg.com/ny/api/res/1.2/6h7AI_EiwDliSizrY2AzKw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD03MDA-/https://media.zenfs.com/en/cnet_articles_178/0a31c98b5fa4a8f5f5f3366557b7d467" alt="Apple Pixar style robotic lamp prototype 2025">
+        </div>
+
+        <!-- Slide 8: Design Features & AI Integration -->
+        <div class="slide" id="slide8">
+            <h2>Design Features & AI Integration</h2>
+            <table>
+                <tr><th>Feature</th><th>Description</th><th>Course Tie-In</th></tr>
+                <tr><td>Personalized Stories</td><td>Antique motifs for surprises.</td><td>Controlled randomness.</td></tr>
+                <tr><td>Emotion Adaptation</td><td>Facial recognition for engagement.</td><td>Affection/reflection.</td></tr>
+                <tr><td>Gamified Prompts</td><td>"What if" scenarios.</td><td>Curiosity/exploration.</td></tr>
+                <tr><td>Open-Ended Play</td><td>Branching narratives.</td><td>Magic circle.</td></tr>
+            </table>
+        </div>
+
+        <!-- Slide 9: Evaluation & Future Work -->
+        <div class="slide" id="slide9">
+            <h2>Evaluation & Future Work</h2>
+            <ul>
+                <li>Strengths: Inclusive fun; evidence-based reflection (Woods et al., 2018).</li>
+                <li>Challenges: Balance randomness; ethical emotion tracking.</li>
+                <li>Future: Add social elements; test for immersion.</li>
+            </ul>
+            <img src="https://media.nngroup.com/media/editor/2018/02/25/two-gulfs.png" alt="Don Norman bridge model gulf of execution and evaluation">
+        </div>
+
+        <!-- Slide 10: Q&A / Thank You -->
+        <div class="slide" id="slide12">
+            <h2>Q&A / Thank You</h2>
+            <p>How can antiques inspire more playfulness in 3D vision? Thoughts?</p>
+            <img src="https://images.adsttc.com/media/images/6331/4d6c/a153/3e01/6e21/dacf/large_jpg/what-is-urban-gamification_1.jpg?1664175486" alt="Piano stairs urban gamification fun public space">
         </div>
     </div>
-   
+
+    <!-- Navigation -->
+    <div class="nav">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
     <script>
-        // Table row highlight
-        const tableRows = document.querySelectorAll('#antique-table tr:not(:first-child)');
-        tableRows.forEach(row => {
-            row.addEventListener('click', () => {
-                row.style.backgroundColor = row.style.backgroundColor === 'rgb(240, 248, 255)' ? '' : '#f0f8ff';
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
             });
-        });
-
-        // Image gallery modals for both galleries
-        const galleries = document.querySelectorAll('.image-gallery');
-        galleries.forEach(gallery => {
-            const images = gallery.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('click', () => {
-                    document.getElementById('modalImage').src = img.src;
-                    document.getElementById('modalImage').alt = img.alt;
-                    document.getElementById('modalCaption').textContent = img.dataset.caption || img.alt;
-                    document.getElementById('imageModal').style.display = 'flex';
-                });
-            });
-        });
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
         }
-        document.getElementById('close-modal').addEventListener('click', closeModal);
 
-        // Close modal on outside click
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('imageModal')) {
-                closeModal();
-            }
-        });
-
-        // Random antique facts (expanded)
-        const antiqueFacts = [
-            "The Mechanical Monk from 1560 was created to pray continuously, blending faith and mechanics.",
-            "Al-Jazari's inventions in 1206 included programmable automata, early precursors to modern AI.",
-            "Vaucanson’s Digesting Duck amazed 18th-century audiences by simulating eating and digestion.",
-            "The Silver Swan automaton from 1773 still performs in museums, captivating with its graceful motions.",
-            "Peacock clocks used intricate gears to animate birds, evoking wonder and curiosity.",
-            "Jaquet-Droz's 1774 automata included 'The Draughtsman,' a boy who draws pictures, showcasing early programmable creativity that inspires modern AI art generators.",
-            "Archytas' Dove from around 400 BCE was a steam-powered flying bird, one of the earliest known automata, blending engineering with mythical wonder.",
-            "The Lambert Clown Magician Automaton from 1890 performs magic tricks with hidden gears, evoking surprise and laughter through illusory play.",
-            "Maillardet's Automaton (1805) is a drawing and writing machine that 'remembers' poems, linking to reminiscence through mechanical memory.",
-            "Jean-Eugène Robert-Houdin's automata in the 1800s included orange trees that bloomed on command, using magic and mechanics to delight audiences."
-        ];
-        function showRandomFact() {
-            const factDiv = document.getElementById('random-fact');
-            const randomIndex = Math.floor(Math.random() * antiqueFacts.length);
-            factDiv.textContent = antiqueFacts[randomIndex];
-            factDiv.style.display = 'block';
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
-        document.getElementById('fact-button').addEventListener('click', showRandomFact);
 
-        // Gear click for random animation (e.g., shake page elements)
-        function triggerRandomAnimation() {
-            document.body.style.animation = 'shake 0.5s';
-            setTimeout(() => { document.body.style.animation = ''; }, 500);
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
         }
-        document.getElementById('gear-element').addEventListener('click', triggerRandomAnimation);
 
-        // Reminiscence generator
+        showSlide(currentSlide);
+
+        // Demo script from previous HTML
         function generatePlayfulReminiscence() {
             const memory = document.getElementById('memory').value.trim();
             if (!memory) {
                 alert('Please enter a memory!');
                 return;
             }
-           
             const twists = [
                 'but suddenly, a mischievous talking animal joined the adventure!',
                 'and it turned into a spontaneous dance party with your favorite tunes!',
@@ -480,9 +231,9 @@
                 'featuring unexpected guests from your favorite childhood stories!',
                 'complete with hidden treasures and silly riddles to solve!',
                 'as if powered by ancient clockwork, with gears turning mysteriously!',
-                'like a medieval automaton coming to life in surprising ways!'
+                'like a medieval automaton coming to life in surprising ways!',
+                'with AI-assisted movements, like Apple\'s 2027 robotic lamp tracking your every gesture!'
             ];
-           
             const randomTwist = twists[Math.floor(Math.random() * twists.length)];
             const prompts = [
                 'How did that make you feel? Want to add more details?',
@@ -491,19 +242,12 @@
                 'Imagine it as an antique machine: What mechanism would power it?'
             ];
             const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-           
             const story = `Your memory: "${memory}".<br><br>Playful AI version: ${memory} ${randomTwist}<br><br>${randomPrompt}`;
-           
             const outputDiv = document.getElementById('output');
             outputDiv.innerHTML = story;
             outputDiv.style.display = 'block';
-            // Trigger animation reset for replay
-            outputDiv.style.animation = 'none';
-            outputDiv.offsetHeight; // Force reflow
-            outputDiv.style.animation = 'slideInRight 1s ease-out forwards';
         }
         document.getElementById('play-button').addEventListener('click', generatePlayfulReminiscence);
-
         function clearOutput() {
             document.getElementById('output').style.display = 'none';
             document.getElementById('memory').value = '';
