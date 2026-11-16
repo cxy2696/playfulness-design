@@ -1,517 +1,613 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playful AI in Reminiscence: Inspired by Antiques</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .image-gallery img {
-                max-width: 100%;
-            }
-        }
-        h1 {
-            text-align: center;
-            color: #4a90e2;
-            animation: bounce 2s infinite, colorShift 5s infinite alternate;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        @keyframes colorShift {
-            0% { color: #4a90e2; }
-            100% { color: #ff69b4; }
-        }
-        h2 {
-            color: #2e6da4;
-            position: relative;
-            animation: slideInLeft 1s ease-out;
-        }
-        @keyframes slideInLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        ul li {
-            opacity: 0;
-            animation: fadeInUp 0.5s forwards;
-        }
-        ul li:nth-child(1) { animation-delay: 0.2s; }
-        ul li:nth-child(2) { animation-delay: 0.4s; }
-        ul li:nth-child(3) { animation-delay: 0.6s; }
-        ul li:nth-child(4) { animation-delay: 0.8s; }
-        ul li:nth-child(5) { animation-delay: 1s; }
-        ul li:nth-child(6) { animation-delay: 1.2s; }
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        #input-section {
-            margin: 20px auto;
-            max-width: 600px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-            50% { box-shadow: 0 6px 12px rgba(74,144,226,0.5); }
-            100% { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        textarea:focus {
-            border-color: #4a90e2;
-            outline: none;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s, transform 0.3s;
-            margin-right: 10px;
-        }
-        button:hover {
-            background-color: #4cae4c;
-            transform: scale(1.05) rotate(2deg);
-        }
-        #output {
-            margin: 20px auto;
-            max-width: 600px;
-            background: #dff0d8;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #d6e9c6;
-            display: none;
-            animation: slideInRight 1s ease-out forwards;
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .image-gallery {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        .image-gallery img {
-            max-width: 300px;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            cursor: pointer;
-            will-change: transform;
-        }
-        .image-gallery img:nth-child(odd) {
-            animation-delay: 0.3s;
-        }
-        .image-gallery img:nth-child(even) {
-            animation-delay: 0.6s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .image-gallery img:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            opacity: 0;
-            animation: fadeInUp 0.5s forwards;
-            transition: background-color 0.3s;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(1) td { animation-delay: 0.2s; }
-        tr:nth-child(2) td { animation-delay: 0.4s; }
-        tr:nth-child(3) td { animation-delay: 0.6s; }
-        tr:nth-child(4) td { animation-delay: 0.8s; }
-        tr:hover {
-            background-color: #f0f8ff;
-            cursor: pointer;
-        }
-        /* Antique-inspired gear animation */
-        .gear {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: url('https://img.icons8.com/ios/50/000000/gear.png') no-repeat center/contain;
-            animation: rotateGear 5s linear infinite;
-            opacity: 0.5;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .gear:hover {
-            opacity: 1;
-        }
-        @keyframes rotateGear {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 80%;
-            animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-        .modal img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        /* Random fact section */
-        #fact-section {
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: center;
-        }
-        #random-fact {
-            background: #fffacd;
-            padding: 15px;
-            border-radius: 10px;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        /* Shake animation for gear click */
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 12 Playful Antiques — Interactive Demo</title>
+  <meta name="description" content="An interactive demo of playful antique automata for reminiscence: explore historical automatons, discover facts, and turn a memory into a small keepsake card.">
+  <meta name="author" content="Xinyi Cui">
+  <meta name="theme-color" content="#f6f1e7">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://cxy2696.github.io/playfulness-design/play.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Week 12 Playful Antiques — Interactive Demo">
+  <meta property="og:description" content="Historical automata, playful facts, and a memory that becomes a keepsake card.">
+  <meta property="og:url" content="https://cxy2696.github.io/playfulness-design/play.html">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Silver_Swan.jpg/960px-Silver_Swan.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var theme = null;
+      var size = null;
+      try {
+        theme = localStorage.getItem("pa-theme");
+        size = localStorage.getItem("pa-size");
+      } catch (error) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      root.setAttribute("data-theme", theme);
+      if (size) {
+        root.style.fontSize = size + "%";
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/play.css">
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/play.js" defer></script>
 </head>
 <body>
-    <h1>Week 12 Playful Antiques</h1>
-    <p>Playfulness enhanced with inspirations from antique automata. This could be useful for older adults but I want it be fun for everyone. Updated as of November 12, 2025 with latest on Apple's robotic lamp prototype.</p>
-  
-    <h2>Design Concept</h2>
-    <p>Transforming user's stories with random elements and antique-inspired twists (e.g., imagining memories as clockwork adventures). It encourages voluntary involvement via "what if" scenarios, drawing from medieval automata for added wonder.</p>
-    <p>Key Features (Conceptual):</p>
-    <ul>
-        <li>Generates personalized stories (e.g., MemoryLane), with antique motifs for surprise.</li>
-        <li>Adapts via emotions (e.g., facial recognition like LONG-REMI) to maintain positive engagement.</li>
-        <li>Incorporates gamified elements like proverb completions or rhythm games, evoking physical/emotional responses.</li>
-        <li>Uses controlled randomness for surprises, fostering curiosity, now inspired by historical mechanisms.</li>
-    </ul>
-  
-    <h2>Playful Elements from the Course</h2>
-    <ul>
-        <li><strong>Openness and Ambiguity:</strong> Memories reimagined with twists, like magical elements or alternate endings.</li>
-        <li><strong>Curiosity and Exploration:</strong> Users explore story branches, akin to pervasive games.</li>
-        <li><strong>Affection and Reflection:</strong> Empathetic responses encourage connections, like affective motion in Pinokio Lamp.</li>
-        <li><strong>Non-Utilitarian Fun:</strong> Focuses on ludic activities, blurring play and life, as in the Drift Table.</li>
-        <li><strong>Mind-Body Push-and-Pull:</strong> Suggests physical actions.</li>
-        <li><strong>Magic Circle:</strong> Creates an enchanted zone for control play, like Brainball or Broncomatic.</li>
-    </ul>
-  
-    <h2>Connections to Antique Automata</h2>
-    <p>The module mentions medieval robots (500-1500 CE) as precursors. These automata embodied play through hidden mechanisms, fostering curiosity and ambiguity, much like modern designs. Here's a table comparing concepts</p>
-  
-    <table id="antique-table">
-        <tr>
-            <th>Module Concept</th>
-            <th>Description from Module</th>
-            <th>Related Antique Example</th>
-            <th>Connection to Playfulness</th>
-        </tr>
-        <tr>
-            <td>Affective + Abstract Robotic Motion</td>
-            <td>As in Pinokio Lamp (2012) and Apple's prototype tabletop robot (2025), subtle movements enhance acceptance.</td>
-            <td>The Mechanical Monk (1560) by Juanelo Turriano: Clockwork friar walks, prays, moves eyes/lips.</td>
-            <td>Evokes affection through lifelike gestures, creating emotional engagement like modern AI motion.</td>
-        </tr>
-        <tr>
-            <td>Ludic Activities (Curiosity, Exploration)</td>
-            <td>Drift Table (2004) supports non-task exploration.</td>
-            <td>Al-Jazari's Floating Orchestra (1206): Water-powered boat with programmable musicians.</td>
-            <td>Promotes exploratory play via surprises, blurring real and mechanical in a "magic circle."</td>
-        </tr>
-        <tr>
-            <td>Mind-Body Push-and-Pull</td>
-            <td>Brainball (2000) contests control for fun.</td>
-            <td>Vaucanson’s Digesting Duck (1739): Eats, "digests" grain into pellets.</td>
-            <td>Interactive feeding evokes ambiguity (alive?), with randomness like immersion in games.</td>
-        </tr>
-        <tr>
-            <td>Magic Circle</td>
-            <td>Draws users into enchanted zones, as in pervasive games.</td>
-            <td>The Silver Swan (1773) by Cox and Merlin: Preens, catches fish, swims with music.</td>
-            <td>Creates reflective zone through affectionate motions, tuning to cultural wonder.</td>
-        </tr>
-        <tr>
-            <td>Openness and Ambiguity</td>
-            <td>Memories reimagined with twists, like magical elements or alternate endings.</td>
-            <td>Jaquet-Droz The Writer (1774): A programmable boy that writes custom messages with fluid motions.</td>
-            <td>Fosters curiosity through "hidden" programming, allowing users to explore endless story variations, much like branching narratives in games.</td>
-        </tr>
-        <tr>
-            <td>Curiosity and Exploration</td>
-            <td>Users explore story branches, akin to pervasive games.</td>
-            <td>The Turk (1770) by Wolfgang von Kempelen: A chess-playing "automaton" (later revealed as a hoax with a hidden operator).</td>
-            <td>Sparks wonder and investigation into its mechanisms, blending deception with playful challenge, encouraging repeated engagement.</td>
-        </tr>
-        <tr>
-            <td>Non-Utilitarian Fun</td>
-            <td>Focuses on ludic activities, blurring play and life.</td>
-            <td>Tipoo's Tiger (1790s): A life-sized automaton of a tiger mauling a European soldier, with sounds and movements.</td>
-            <td>Delivers surprise and delight through dramatic, non-practical spectacle, evoking emotional responses like awe or humor in a historical context.</td>
-        </tr>
-    </table>
-  
-    <h2>Antique Vision</h2>
-    <div class="image-gallery" id="antique-gallery">
-        <img src="https://i.ytimg.com/vi/jiVKnlXcDDg/maxresdefault.jpg" alt="Mechanical Monk by Juanelo Turriano" data-caption="A clockwork friar that simulates prayer, evoking affection through motion.">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2rlIL58XRExZ6J8QUkzuDr4FF3WU-VCaoniCFrR_gbhwnFrn-H-7Rk05D2jivDe3jIq0PL7SfoPY1y1iOT8ofWpHVo_uHpI6PG9kzTwZXY_RkkdcHwlfvRTB2HM4v379VmW8gVJvpPNg/w1200-h630-p-k-no-nu/1560s-mechanical-monk.jpg" alt="Mechanical Monk internals" data-caption="Internal mechanisms of the Mechanical Monk, showcasing hidden ingenuity.">
-        <img src="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" alt="Al-Jazari's Floating Orchestra illustration" data-caption="Illustration of water-powered musicians on a boat for entertainment.">
-        <img src="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" alt="Floating Orchestra mechanism" data-caption="Detailed mechanism of Al-Jazari's programmable orchestra.">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" alt="Vaucanson’s Digesting Duck" data-caption="The famous duck that mimics digestion, blending ambiguity and interactivity.">
-        <img src="https://img.atlasobscura.com/trRJJiQtRDir1_tQdnlNBAMdkpXlaiVr7RKdzUHbh_c/rs:fill:300:200:1/g:ce/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy82OTVlNGI3ZTg4/M2I0NzEzOGFfZGln/ZXN0aW5nZHVjay5q/cGc.jpg" alt="Digesting Duck close-up" data-caption="Close-up of Vaucanson’s ingenious automaton.">
-        <img src="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" alt="Silver Swan by James Cox" data-caption="The elegant Silver Swan, creating an enchanted zone with its movements.">
-        <img src="https://www.bbc.co.uk/staticarchive/c6b98e4c739d838ea73870d7fa273b56b146b6ee" alt="Silver Swan display" data-caption="Display of the Silver Swan in action.">
-        <img src="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" alt="Peacock Clock at Hermitage" data-caption="The lavish Peacock Clock with animated birds.">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/1200px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" alt="Gilded Peacock Clock" data-caption="Gilded version of the Peacock Clock, full of surprise and delight.">
-        <img src="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" alt="Al-Jazari Peacock Fountain illustration" data-caption="Illustration of the interactive Peacock Fountain.">
-        <img src="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" alt="Reconstructed Peacock Fountain" data-caption="Modern reconstruction of Al-Jazari's Peacock Fountain.">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="index.html">
+        <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.4"/>
+          <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M18.6 5.4l-1.5 1.5M6.9 17.1l-1.5 1.5"/>
+          <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="brand__text">
+          <span class="brand__name">Playful Antiques</span>
+          <span class="brand__sub">Interactive demo</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html">Presentation</a>
+        <a href="play.html" aria-current="page">Play demo</a>
+      </nav>
+
+      <div class="controls" role="group" aria-label="Display settings">
+        <button class="ctl ctl--size" type="button" data-size="down" aria-label="A− Decrease text size">A−</button>
+        <button class="ctl ctl--size" type="button" data-size="up" aria-label="A+ Increase text size">A+</button>
+        <button class="ctl" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/>
+          </svg>
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M18.5 5.5l-1.4 1.4M6.9 17.1l-1.4 1.4"/>
+          </svg>
+        </button>
+      </div>
+
+      <p class="sr-only" role="status" aria-live="polite" data-size-status></p>
     </div>
-  
-    <div id="fact-section">
-        <button id="fact-button" aria-label="Discover a random antique fact">Discover Random Antique Fact</button>
-        <div id="random-fact"></div>
-    </div>
-  
-    <p>Playful twist with optional antique-inspired elements (e.g., clockwork surprises).</p>
-    <div id="input-section">
-        <label for="memory">Describe a past memory:</label><br>
-        <textarea id="memory" placeholder="Type your memory here..."></textarea><br>
-        <button id="play-button" aria-label="Generate playful reminiscence">Play</button>
-        <button id="clear-button" aria-label="Clear output">Clear</button>
-    </div>
-  
-    <div id="output"></div>
-  
-    <h2>Visual Inspirations (Modern)</h2>
-    <div class="image-gallery" id="modern-gallery">
-        <img src="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" alt="VR reminiscence therapy for elderly" data-caption="Elderly people engaging in VR-based reminiscence therapy.">
-        <img src="https://cdn.mos.cms.futurecdn.net/VNtDpUkSX4Brh8Pq4Ago5i.jpg" alt="Photo reminiscence therapy box" data-caption="Box of old photos used in photo reminiscence therapy for dementia patients.">
-        <img src="https://www.mdpi.com/sustainability/sustainability-11-04792/article_deploy/html/images/sustainability-11-04792-g002.png" alt="Reminiscence therapy system diagram" data-caption="Diagram of a reminiscence therapy system for the elderly using AI.">
-        <img src="https://cdn.prod.website-files.com/67f6d78f0e7aeeb45a55ed34/68de174f693128915187f674_474f0cea-201e-4267-96e9-ccc66794f41b.webp" alt="Cozy setting for reminiscence therapy" data-caption="Cozy living room setting for reminiscence therapy sessions with seniors.">
-    </div>
-  
-    <h2>References</h2>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Automaton">Wikipedia: Automaton - Overview of historical automata and examples.</a></li>
-        <li><a href="https://www.history.com/news/7-early-robots-and-automatons">History.com: 7 Early Robots and Automatons.</a></li>
-        <li><a href="https://www.atlasobscura.com/">Atlas Obscura: Notable automata like Tipoo's Tiger and Jaquet-Droz.</a></li>
-        <li><a href="https://machinelearning.apple.com/research/elegnt-expressive-functional-movement">Apple Machine Learning Research: ELEGNT: Expressive and Functional Movement Design for Non-Anthropomorphic Robot (published on Apple ML site, accessed Nov 2025).</a><grok-card data-id="389138" data-type="citation_card"></grok-card></li>
-        <li><a href="https://techxplore.com/news/2025-02-apple-pixar-table-lamp-ai.html">TechXplore: Apple gives table lamp AI personality (Feb 2025).</a><grok-card data-id="d55887" data-type="citation_card"></grok-card></li>
-        <li><a href="https://www.macrumors.com/2025/02/06/apple-prototypes-tabletop-robot/">MacRumors: Apple Prototypes Tabletop Robot With Lifelike Movements Ahead of Rumored Launch by 2027 (Feb 2025).</a><grok-card data-id="248716" data-type="citation_card"></grok-card></li>
-    </ul>
-  
-    <!-- Antique gear element for playful touch -->
-    <div class="gear" id="gear-element"></div>
-  
-    <!-- Modal for image lightbox -->
-    <div id="imageModal" class="modal">
-        <span class="close" id="close-modal">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="Modal image">
-            <p id="modalCaption"></p>
+  </header>
+
+  <main id="main">
+    <!-- Hero ------------------------------------------------------------- -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="wrap page-hero__grid">
+        <div>
+          <p class="eyebrow">Interactive demo · Week 12</p>
+          <h1 id="page-title">Week 12 Playful Antiques</h1>
+          <p class="page-hero__lede">Playfulness enhanced with inspirations from antique automata. This could be useful for older adults, but I want it to be fun for everyone.</p>
+          <p class="page-hero__meta">
+            <span class="chip chip--brass">Updated November 12, 2025</span>
+            <span class="chip">Apple robotic lamp prototype</span>
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn" href="#playground">
+              Try the memory game
+              <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v9M4.5 8.5 8 12l3.5-3.5"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="index.html">Back to the presentation</a>
+          </div>
         </div>
+
+        <svg class="clockwork" viewBox="0 0 320 320" role="img" aria-label="Decorative drawing of a clockwork dial">
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="160" cy="160" r="150" opacity="0.22"/>
+            <circle cx="160" cy="160" r="126"/>
+            <circle cx="160" cy="160" r="94" stroke-dasharray="2 6" opacity="0.8"/>
+            <g opacity="0.75">
+              <line x1="160" y1="20" x2="160" y2="34"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(30 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(60 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(90 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(120 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(150 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(180 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(210 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(240 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(270 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(300 160 160)"/>
+              <line x1="160" y1="20" x2="160" y2="34" transform="rotate(330 160 160)"/>
+            </g>
+            <path d="M160 160V80" stroke-width="2"/>
+            <path d="M160 160l42 34" stroke-width="2"/>
+            <circle cx="160" cy="160" r="7" fill="currentColor" stroke="none"/>
+            <circle cx="160" cy="160" r="120" stroke-dasharray="1 16" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Design concept --------------------------------------------------- -->
+    <section class="section" id="concept" aria-labelledby="concept-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">01 · Concept</span>
+          <span class="kicker">A story machine with gears</span>
+        </div>
+        <h2 id="concept-title">Design Concept</h2>
+        <p class="section__lede">Transforming a user's stories with random elements and antique-inspired twists (e.g., imagining memories as clockwork adventures). It encourages voluntary involvement through &ldquo;what if&rdquo; scenarios, drawing from medieval automata for added wonder.</p>
+
+        <h3>Key features (conceptual)</h3>
+        <div class="card-grid">
+          <div class="card">
+            <span class="card__tag">Story</span>
+            <h4>Personalised tales</h4>
+            <p>Generates personalised stories (e.g., MemoryLane), with antique motifs for surprise.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Emotion</span>
+            <h4>Reads the room</h4>
+            <p>Adapts via emotions (e.g., facial recognition like LONG-REMI) to maintain positive engagement.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Play</span>
+            <h4>Small games</h4>
+            <p>Incorporates gamified elements like proverb completions or rhythm games, evoking physical and emotional responses.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Surprise</span>
+            <h4>Controlled randomness</h4>
+            <p>Uses controlled randomness for surprises, fostering curiosity, now inspired by historical mechanisms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playful elements ------------------------------------------------- -->
+    <section class="section" id="elements" aria-labelledby="elements-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">02 · Principles</span>
+          <span class="kicker">Borrowed from the course</span>
+        </div>
+        <h2 id="elements-title">Playful Elements from the Course</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Openness and ambiguity</h3>
+            <p>Memories reimagined with twists, like magical elements or alternate endings.</p>
+          </div>
+          <div class="card">
+            <h3>Curiosity and exploration</h3>
+            <p>Users explore story branches, akin to pervasive games.</p>
+          </div>
+          <div class="card">
+            <h3>Affection and reflection</h3>
+            <p>Empathetic responses encourage connections, like affective motion in the Pinokio Lamp.</p>
+          </div>
+          <div class="card">
+            <h3>Non-utilitarian fun</h3>
+            <p>Focuses on ludic activities, blurring play and life, as in the Drift Table.</p>
+          </div>
+          <div class="card">
+            <h3>Mind-body push-and-pull</h3>
+            <p>Suggests physical actions.</p>
+          </div>
+          <div class="card">
+            <h3>Magic circle</h3>
+            <p>Creates an enchanted zone for control play, like Brainball or Broncomatic.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connections ------------------------------------------------------ -->
+    <section class="section" id="connections" aria-labelledby="connections-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">03 · Connections</span>
+          <span class="kicker">Play principles &amp; automata</span>
+        </div>
+        <h2 id="connections-title">Connections to Antique Automata</h2>
+        <p class="section__lede">The module mentions medieval robots (500&ndash;1500&nbsp;CE) as precursors. These automata embodied play through hidden mechanisms, fostering curiosity and ambiguity, much like modern designs. Here is a table comparing concepts.</p>
+
+        <div class="table-wrap table-wrap--wide">
+          <table>
+            <caption>Seven playful principles mapped to historical automata.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Module concept</th>
+                <th scope="col">Description from module</th>
+                <th scope="col">Related antique example</th>
+                <th scope="col">Connection to playfulness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Affective + abstract robotic motion</th>
+                <td data-label="From the module">As in Pinokio Lamp (2012) and Apple's prototype tabletop robot (2025), subtle movements enhance acceptance.</td>
+                <td data-label="Antique example">The Mechanical Monk (1560) by Juanelo Turriano: clockwork friar walks, prays, moves eyes and lips.</td>
+                <td data-label="Connection">Evokes affection through lifelike gestures, creating emotional engagement like modern AI motion.</td>
+              </tr>
+              <tr>
+                <th scope="row">Ludic activities (curiosity, exploration)</th>
+                <td data-label="From the module">Drift Table (2004) supports non-task exploration.</td>
+                <td data-label="Antique example">Al-Jazari's Floating Orchestra (1206): water-powered boat with programmable musicians.</td>
+                <td data-label="Connection">Promotes exploratory play via surprises, blurring real and mechanical in a &ldquo;magic circle.&rdquo;</td>
+              </tr>
+              <tr>
+                <th scope="row">Mind-body push-and-pull</th>
+                <td data-label="From the module">Brainball (2000) contests control for fun.</td>
+                <td data-label="Antique example">Vaucanson's Digesting Duck (1739): eats, &ldquo;digests&rdquo; grain into pellets.</td>
+                <td data-label="Connection">Interactive feeding evokes ambiguity (is it alive?), with randomness like immersion in games.</td>
+              </tr>
+              <tr>
+                <th scope="row">Magic circle</th>
+                <td data-label="From the module">Draws users into enchanted zones, as in pervasive games.</td>
+                <td data-label="Antique example">The Silver Swan (1773) by Cox and Merlin: preens, catches fish, swims with music.</td>
+                <td data-label="Connection">Creates a reflective zone through affectionate motions, tuning to cultural wonder.</td>
+              </tr>
+              <tr>
+                <th scope="row">Openness and ambiguity</th>
+                <td data-label="From the module">Memories reimagined with twists, like magical elements or alternate endings.</td>
+                <td data-label="Antique example">Jaquet-Droz's The Writer (1774): a programmable boy that writes custom messages with fluid motions.</td>
+                <td data-label="Connection">Fosters curiosity through &ldquo;hidden&rdquo; programming, allowing users to explore endless story variations, much like branching narratives in games.</td>
+              </tr>
+              <tr>
+                <th scope="row">Curiosity and exploration</th>
+                <td data-label="From the module">Users explore story branches, akin to pervasive games.</td>
+                <td data-label="Antique example">The Turk (1770) by Wolfgang von Kempelen: a chess-playing &ldquo;automaton&rdquo; (later revealed as a hoax with a hidden operator).</td>
+                <td data-label="Connection">Sparks wonder and investigation into its mechanisms, blending deception with playful challenge, encouraging repeated engagement.</td>
+              </tr>
+              <tr>
+                <th scope="row">Non-utilitarian fun</th>
+                <td data-label="From the module">Focuses on ludic activities, blurring play and life.</td>
+                <td data-label="Antique example">Tipoo's Tiger (1790s): a life-sized automaton of a tiger mauling a European soldier, with sounds and movements.</td>
+                <td data-label="Connection">Delivers surprise and delight through dramatic, non-practical spectacle, evoking emotional responses like awe or humour in a historical context.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Antique vision --------------------------------------------------- -->
+    <section class="section" id="vision" aria-labelledby="vision-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">04 · Cabinet</span>
+          <span class="kicker">Twelve automata and mechanisms</span>
+        </div>
+        <h2 id="vision-title">Antique Vision</h2>
+        <p class="section__lede">The machines that first made people wonder whether an object could be alive. Select any image to see it at full size.</p>
+
+        <ul class="gallery">
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Automaton_of_a_Friar%2C_mid-16th_century_-_Metropolitan_Museum_of_Art%2C_New_York_City.jpg/960px-Automaton_of_a_Friar%2C_mid-16th_century_-_Metropolitan_Museum_of_Art%2C_New_York_City.jpg" data-lightbox data-caption="The Automaton of a Friar, mid-16th century: a wooden clockwork monk that walks, prays, and moves its eyes and lips." aria-label="Enlarge image: Automaton of a Friar, the Mechanical Monk">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Automaton_of_a_Friar%2C_mid-16th_century_-_Metropolitan_Museum_of_Art%2C_New_York_City.jpg/960px-Automaton_of_a_Friar%2C_mid-16th_century_-_Metropolitan_Museum_of_Art%2C_New_York_City.jpg" alt="The Automaton of a Friar, a wooden clockwork monk with its mechanism visible at the base" width="960" height="1351" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Automaton of a Friar (the Mechanical Monk), mid-16th century. (The Met)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Automaton_of_a_Friar_10.jpg/960px-Automaton_of_a_Friar_10.jpg" data-lightbox data-caption="An X-ray of the friar automaton, revealing the clockwork mechanism hidden inside." aria-label="Enlarge image: X-ray of the friar automaton">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Automaton_of_a_Friar_10.jpg/960px-Automaton_of_a_Friar_10.jpg" alt="X-ray image revealing the clockwork mechanism inside the friar automaton" width="960" height="1292" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>X-ray of the friar automaton, revealing the mechanism inside. (Wikimedia Commons)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" data-lightbox data-caption="Illustration of water-powered musicians on a boat for entertainment." aria-label="Enlarge image: Al-Jazari's Floating Orchestra illustration">
+                <img src="https://historyofinformation.com/images/Screen_Shot_2020-09-12_at_10.28.46_AM_big.png" alt="Al-Jazari's Floating Orchestra illustration" width="777" height="580" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Al-Jazari's Floating Orchestra &mdash; water-powered musicians on a boat.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" data-lightbox data-caption="Detailed mechanism of Al-Jazari's programmable orchestra." aria-label="Enlarge image: Floating Orchestra mechanism">
+                <img src="https://aljazaribook.com/wp-content/uploads/2019/08/musical-boat_mechanism_en.jpg" alt="Floating Orchestra mechanism" width="491" height="407" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Detail of Al-Jazari's programmable orchestra mechanism.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" data-lightbox data-caption="The famous duck that mimics digestion, blending ambiguity and interactivity." aria-label="Enlarge image: Vaucanson's Digesting Duck">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Vaucanson_Automata.jpg" alt="Vaucanson's Digesting Duck" width="509" height="280" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Vaucanson's Digesting Duck &mdash; the famous bird that mimics digestion.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/8/8f/Digesting_Duck.jpg" data-lightbox data-caption="Vaucanson's Digesting Duck automaton, photographed at the museum." aria-label="Enlarge image: The Digesting Duck automaton">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Digesting_Duck.jpg" alt="The Digesting Duck automaton by Jacques de Vaucanson" width="940" height="935" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>The Digesting Duck automaton, close up. (Wikimedia Commons)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" data-lightbox data-caption="The elegant Silver Swan, creating an enchanted zone with its movements." aria-label="Enlarge image: The Silver Swan by James Cox">
+                <img src="https://journals.openedition.org/artefact/docannexe/image/525/img-1.png" alt="The Silver Swan by James Cox" width="800" height="508" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>The Silver Swan (1773) by James Cox &mdash; an enchanted zone of movement.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Silver_Swan.jpg/960px-Silver_Swan.jpg" data-lightbox data-caption="Display of the Silver Swan in action at the Bowes Museum." aria-label="Enlarge image: Silver Swan display at the Bowes Museum">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Silver_Swan.jpg/960px-Silver_Swan.jpg" alt="Silver Swan display at the Bowes Museum" width="960" height="720" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Silver Swan display at the Bowes Museum. (Wikimedia Commons)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" data-lightbox data-caption="The lavish Peacock Clock with animated birds at the Hermitage." aria-label="Enlarge image: Peacock Clock at the Hermitage">
+                <img src="https://hermitagemuseum.org/api/files/fshow?needlePath=%2Fapi%2Fspf%2FB3savLYZP4DODCKAD9NaryJ4wkwUaUtXutGe9XQOlWSoah10-cacH_TfEr7za2Wh.jpg%3Fw%3D1600%26h%3D1600" alt="Peacock Clock at the Hermitage" width="1600" height="1303" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>The Peacock Clock at the Hermitage &mdash; animated birds, hidden gears.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/960px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" data-lightbox data-caption="Gilded version of the Peacock Clock, full of surprise and delight." aria-label="Enlarge image: Gilded Peacock Clock by James Cox">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Die_vergoldete_Pfauenuhr_von_James_Cox.jpg/960px-Die_vergoldete_Pfauenuhr_von_James_Cox.jpg" alt="Gilded Peacock Clock by James Cox" width="960" height="720" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Gilded Peacock Clock by James Cox. (Wikimedia Commons)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" data-lightbox data-caption="Illustration of the interactive Peacock Fountain." aria-label="Enlarge image: Al-Jazari Peacock Fountain illustration">
+                <img src="https://i0.wp.com/aljazaribook.com/wp-content/uploads/2015/03/basin-of-the-peacock-p151_cut.jpg?ssl=1" alt="Al-Jazari Peacock Fountain illustration" width="454" height="370" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Al-Jazari's interactive Peacock Fountain, illustrated.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" data-lightbox data-caption="Modern reconstruction of Al-Jazari's Peacock Fountain." aria-label="Enlarge image: Reconstructed Peacock Fountain">
+                <img src="https://www.middleeasteye.net/sites/default/files/styles/max_2600x2600/public/images-story/peacock_version_two.jpg.jpg?itok=_EfXK9q2" alt="Reconstructed Peacock Fountain" width="2600" height="1734" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>A modern reconstruction of Al-Jazari's Peacock Fountain.</figcaption>
+            </figure>
+          </li>
+        </ul>
+
+        <p class="click-hint">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3M7 5v4M5 7h4"/></svg>
+          Select any image to enlarge
+        </p>
+      </div>
+    </section>
+
+    <!-- Fact cabinet ----------------------------------------------------- -->
+    <section class="section" id="facts" aria-labelledby="facts-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">05 · Cabinet of facts</span>
+          <span class="kicker">Eleven small histories</span>
+        </div>
+        <h2 id="facts-title">One Fact at a Time</h2>
+        <p class="section__lede">A small surprise, in the spirit of the automata themselves.</p>
+
+        <div class="fact-panel">
+          <div class="fact-panel__text">
+            <span class="fact-panel__label">From the cabinet</span>
+            <p class="fact-text fact-text--empty" id="random-fact" aria-live="polite">Eleven small histories are waiting in this cabinet.</p>
+          </div>
+          <div class="fact-panel__side">
+            <button class="btn btn--ghost" type="button" id="fact-button">Discover a random antique fact</button>
+            <span class="fact-count" id="fact-count">11 facts in the cabinet</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memory lab ------------------------------------------------------- -->
+    <section class="section" id="playground" aria-labelledby="playground-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">06 · Memory lab</span>
+          <span class="kicker">Playful tourism in your own past</span>
+        </div>
+        <h2 id="playground-title">Turn a Memory Into a Keepsake</h2>
+        <p class="section__lede">Describe a moment, and the page adds one small antique-inspired twist plus a question to linger on. It is a conversation prompt &mdash; not a test, and there are no wrong answers.</p>
+
+        <div class="lab">
+          <form class="panel" id="memory-form" novalidate>
+            <h3 class="panel__title">
+              <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg>
+              Describe a memory
+            </h3>
+
+            <div class="field">
+              <label for="memory">A moment you would like to revisit</label>
+              <textarea id="memory" name="memory" maxlength="280" rows="4" placeholder="e.g. The kitchen radio was always on, and we danced between the table and the stove&hellip;" aria-describedby="memory-hint memory-error"></textarea>
+              <div class="field-meta">
+                <span id="memory-hint">A sentence is plenty. Nothing leaves this browser.</span>
+                <span id="memory-count">0 / 280 characters</span>
+              </div>
+              <p class="field-error" id="memory-error" role="alert" hidden></p>
+            </div>
+
+            <div class="examples" role="group" aria-label="Example memories">
+              <span class="examples__label">Try</span>
+              <button class="example" type="button" data-example="Sunday trips to the seaside with my sisters">Seaside Sundays</button>
+              <button class="example" type="button" data-example="The little clock that stood on my grandmother's kitchen shelf">Grandmother's clock</button>
+              <button class="example" type="button" data-example="Dancing in the living room to the radio on a rainy afternoon">Rainy-day dancing</button>
+            </div>
+
+            <div class="lab__actions">
+              <button class="btn" type="submit" id="play-button">Add a playful twist</button>
+              <button class="btn btn--ghost" type="button" id="clear-button">Clear</button>
+            </div>
+          </form>
+
+          <div class="panel lab__result" aria-labelledby="keepsake-heading">
+            <h3 class="panel__title" id="keepsake-heading">
+              <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5h10M4.5 13.5V4l3.5-1.5L11.5 4v9.5M7 6.5h2M7 9h2"/></svg>
+              Your keepsake
+            </h3>
+
+            <div class="keepsake" id="keepsake">
+              <p class="keepsake__empty" id="keepsake-empty">Your memory will appear here as a small, printable card. Nothing is sent anywhere &mdash; everything happens in this browser.</p>
+            </div>
+
+            <div class="keepsake__actions" id="keepsake-actions" hidden>
+              <button class="btn btn--ghost btn--small" type="button" id="another-twist">Another twist</button>
+              <button class="btn btn--small" type="button" id="print-keepsake">Print the card</button>
+            </div>
+
+            <p class="sr-only" role="status" aria-live="polite" id="lab-status"></p>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="section__lede">The memory game needs JavaScript. You can still read everything else on this page.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Modern inspirations --------------------------------------------- -->
+    <section class="section" id="modern" aria-labelledby="modern-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">07 · Today</span>
+          <span class="kicker">Reminiscence in practice</span>
+        </div>
+        <h2 id="modern-title">Visual Inspirations (Modern)</h2>
+        <p class="section__lede">Contemporary reminders that the past is often best revisited together.</p>
+
+        <ul class="gallery">
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" data-lightbox data-caption="Elderly people engaging in VR-based reminiscence therapy." aria-label="Enlarge image: VR reminiscence therapy">
+                <img src="https://static01.nyt.com/images/2022/05/10/well/27reminiscense-therapy1/merlin_205954650_e39eff67-1992-43ef-9bca-f7e21a570fea-superJumbo.jpg" alt="Older adults wearing VR headsets in a reminiscence therapy session" width="2048" height="1149" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>VR-based reminiscence therapy in progress.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://cdn.mos.cms.futurecdn.net/VNtDpUkSX4Brh8Pq4Ago5i.jpg" data-lightbox data-caption="Box of old photos used in photo reminiscence therapy for dementia patients." aria-label="Enlarge image: Photo reminiscence box">
+                <img src="https://cdn.mos.cms.futurecdn.net/VNtDpUkSX4Brh8Pq4Ago5i.jpg" alt="A box of old photographs used for reminiscence therapy" width="2000" height="1125" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>A box of old photos used in photo reminiscence therapy.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://pub.mdpi-res.com/sustainability/sustainability-11-04792/article_deploy/html/images/sustainability-11-04792-g002.png" data-lightbox data-caption="Diagram of a reminiscence therapy system for the elderly using AI." aria-label="Enlarge image: Reminiscence therapy system diagram">
+                <img src="https://pub.mdpi-res.com/sustainability/sustainability-11-04792/article_deploy/html/images/sustainability-11-04792-g002.png" alt="Diagram of an AI-assisted reminiscence therapy system" width="2276" height="1340" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>Diagram of an AI-assisted reminiscence therapy system. (MDPI)</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="gallery__item">
+              <a class="shot" href="https://cdn.prod.website-files.com/67f6d78f0e7aeeb45a55ed34/68de174f693128915187f674_474f0cea-201e-4267-96e9-ccc66794f41b.webp" data-lightbox data-caption="Cozy living room setting for reminiscence therapy sessions with seniors." aria-label="Enlarge image: Cozy reminiscence setting">
+                <img src="https://cdn.prod.website-files.com/67f6d78f0e7aeeb45a55ed34/68de174f693128915187f674_474f0cea-201e-4267-96e9-ccc66794f41b.webp" alt="A cozy living room arranged for a reminiscence session" width="1024" height="576" loading="lazy" decoding="async" data-fallback>
+              </a>
+              <figcaption>A cozy living room setting for reminiscence sessions.</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- References ------------------------------------------------------ -->
+    <section class="section" id="references" aria-labelledby="references-title">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker">08 · Sources</span>
+          <span class="kicker">Further reading</span>
+        </div>
+        <h2 id="references-title">References</h2>
+
+        <ul class="refs">
+          <li><a href="https://en.wikipedia.org/wiki/Automaton" rel="noopener"><strong>Wikipedia: Automaton</strong></a> &mdash; overview of historical automata and examples.</li>
+          <li><a href="https://www.history.com/news/7-early-robots-and-automatons" rel="noopener"><strong>History.com: 7 Early Robots and Automatons.</strong></a></li>
+          <li><a href="https://www.atlasobscura.com/" rel="noopener"><strong>Atlas Obscura</strong></a> &mdash; notable automata like Tipoo's Tiger and Jaquet-Droz.</li>
+          <li><a href="https://machinelearning.apple.com/research/elegnt-expressive-functional-movement" rel="noopener"><strong>Apple Machine Learning Research: ELEGNT</strong></a> &mdash; expressive and functional movement design for non-anthropomorphic robots (accessed November 2025).</li>
+          <li><a href="https://techxplore.com/news/2025-02-apple-pixar-table-lamp-ai.html" rel="noopener"><strong>TechXplore: Apple gives table lamp AI personality</strong></a> (February 2025).</li>
+          <li><a href="https://www.macrumors.com/2025/02/06/apple-prototypes-tabletop-robot/" rel="noopener"><strong>MacRumors: Apple prototypes tabletop robot with lifelike movements</strong></a> (February 2025).</li>
+          <li><a href="https://ijip.in/wp-content/uploads/2023/03/18.01.173.20231101.pdf" rel="noopener"><strong>K Raghupathy: Effectiveness of Reminiscence Therapy on Levels of Depression Among Elderly</strong></a> (PDF).</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <button class="gear" id="gear-element" type="button" aria-label="Turn the clockwork gear" title="Give the gear a turn">
+    <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="16" cy="16" r="5.2"/>
+      <circle cx="16" cy="16" r="11.4" stroke-dasharray="2.4 4.4"/>
+      <circle cx="16" cy="16" r="1.7" fill="currentColor" stroke="none"/>
+    </svg>
+  </button>
+  <p class="sr-only" role="status" aria-live="polite" id="gear-status"></p>
+
+  <dialog id="lightbox" aria-label="Enlarged image">
+    <div class="dialog-card">
+      <button class="dialog-close" type="button" aria-label="Close image">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+      <figure class="dialog-figure">
+        <img id="lightbox-image" src="assets/img/image-unavailable.svg" alt="">
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
     </div>
-  
-    <script>
-        // Table row highlight
-        const tableRows = document.querySelectorAll('#antique-table tr:not(:first-child)');
-        tableRows.forEach(row => {
-            row.addEventListener('click', () => {
-                row.style.backgroundColor = row.style.backgroundColor === 'rgb(240, 248, 255)' ? '' : '#f0f8ff';
-            });
-        });
-        // Image gallery modals for both galleries
-        const galleries = document.querySelectorAll('.image-gallery');
-        galleries.forEach(gallery => {
-            const images = gallery.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('click', () => {
-                    document.getElementById('modalImage').src = img.src;
-                    document.getElementById('modalImage').alt = img.alt;
-                    document.getElementById('modalCaption').textContent = img.dataset.caption || img.alt;
-                    document.getElementById('imageModal').style.display = 'flex';
-                });
-            });
-        });
-        // Close modal
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
-        document.getElementById('close-modal').addEventListener('click', closeModal);
-        // Close modal on outside click
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('imageModal')) {
-                closeModal();
-            }
-        });
-        // Random antique facts (expanded)
-        const antiqueFacts = [
-            "The Mechanical Monk from 1560 was created to pray continuously, blending faith and mechanics.",
-            "Al-Jazari's inventions in 1206 included programmable automata, early precursors to modern AI.",
-            "Vaucanson’s Digesting Duck amazed 18th-century audiences by simulating eating and digestion.",
-            "The Silver Swan automaton from 1773 still performs in museums, captivating with its graceful motions.",
-            "Peacock clocks used intricate gears to animate birds, evoking wonder and curiosity.",
-            "Jaquet-Droz's 1774 automata included 'The Draughtsman,' a boy who draws pictures, showcasing early programmable creativity that inspires modern AI art generators.",
-            "Archytas' Dove from around 400 BCE was a steam-powered flying bird, one of the earliest known automata, blending engineering with mythical wonder.",
-            "The Lambert Clown Magician Automaton from 1890 performs magic tricks with hidden gears, evoking surprise and laughter through illusory play.",
-            "Maillardet's Automaton (1805) is a drawing and writing machine that 'remembers' poems, linking to reminiscence through mechanical memory.",
-            "Jean-Eugène Robert-Houdin's automata in the 1800s included orange trees that bloomed on command, using magic and mechanics to delight audiences.",
-            "Apple's 2025 prototype tabletop robot, inspired by Pixar's Luxo Jr., uses AI for expressive movements like dancing to music or adjusting to user gestures."
-        ];
-        function showRandomFact() {
-            const factDiv = document.getElementById('random-fact');
-            const randomIndex = Math.floor(Math.random() * antiqueFacts.length);
-            factDiv.textContent = antiqueFacts[randomIndex];
-            factDiv.style.display = 'block';
-        }
-        document.getElementById('fact-button').addEventListener('click', showRandomFact);
-        // Gear click for random animation (e.g., shake page elements)
-        let gearClickCount = 0;
-        function triggerRandomAnimation() {
-            document.body.style.animation = 'shake 0.5s';
-            setTimeout(() => { document.body.style.animation = ''; }, 500);
-        }
-        document.getElementById('gear-element').addEventListener('click', () => {
-            gearClickCount++;
-            triggerRandomAnimation();
-            if (gearClickCount === 12) {
-                window.location.href = 'https://cxy2696.github.io/playfulness-design/';
-            }
-        });
-        // Reminiscence generator
-        function generatePlayfulReminiscence() {
-            const memory = document.getElementById('memory').value.trim();
-            if (!memory) {
-                alert('Please enter a memory!');
-                return;
-            }
-          
-            const twists = [
-                'but suddenly, a mischievous talking animal joined the adventure!',
-                'and it turned into a spontaneous dance party with your favorite tunes!',
-                'with a dash of magic that made everything glow in rainbow colors!',
-                'in a whimsical parallel world where gravity was optional!',
-                'featuring unexpected guests from your favorite childhood stories!',
-                'complete with hidden treasures and silly riddles to solve!',
-                'as if powered by ancient clockwork, with gears turning mysteriously!',
-                'like a medieval automaton coming to life in surprising ways!',
-                'with AI-assisted movements, like Apple\'s 2025 robotic lamp dancing to the rhythm!'
-            ];
-          
-            const randomTwist = twists[Math.floor(Math.random() * twists.length)];
-            const prompts = [
-                'How did that make you feel? Want to add more details?',
-                'What if we explore a different ending? Tell me more!',
-                'Reflect on this: What surprising connection does it have to today?',
-                'Imagine it as an antique machine: What mechanism would power it?'
-            ];
-            const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-          
-            const story = `Your memory: "${memory}".<br><br>Playful AI version: ${memory} ${randomTwist}<br><br>${randomPrompt}`;
-          
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = story;
-            outputDiv.style.display = 'block';
-            // Trigger animation reset for replay
-            outputDiv.style.animation = 'none';
-            outputDiv.offsetHeight; // Force reflow
-            outputDiv.style.animation = 'slideInRight 1s ease-out forwards';
-        }
-        document.getElementById('play-button').addEventListener('click', generatePlayfulReminiscence);
-        function clearOutput() {
-            document.getElementById('output').style.display = 'none';
-            document.getElementById('memory').value = '';
-        }
-        document.getElementById('clear-button').addEventListener('click', clearOutput);
-    </script>
+  </dialog>
+
+  <dialog id="secret-dialog" class="dialog-card secret" aria-labelledby="secret-title">
+    <button class="dialog-close" type="button" id="secret-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <svg class="secret__gear" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+      <circle cx="16" cy="16" r="5.2"/>
+      <circle cx="16" cy="16" r="11.4" stroke-dasharray="2.4 4.4"/>
+      <circle cx="16" cy="16" r="1.7" fill="currentColor" stroke="none"/>
+    </svg>
+    <h2 id="secret-title">You found the hidden mechanism</h2>
+    <p>Twelve turns of the gear opened the little cabinet. That is the oldest trick in the automaton trade: the reward is not the machine, but noticing that it was there all along.</p>
+    <a class="btn" href="index.html">Return to the presentation</a>
+  </dialog>
+
+  <div id="print-root" class="print-root" aria-hidden="true"></div>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div>
+        <div class="site-footer__brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>
+          </svg>
+          Playful Antiques
+        </div>
+        <p>Week 12 interactive demo &mdash; antique automata, playful facts, and a memory that becomes a keepsake.</p>
+        <p class="site-footer__note">All pictures were found directly by asking ChatGPT.</p>
+        <div class="site-footer__links">
+          <a href="index.html">Presentation</a>
+          <a href="https://github.com/cxy2696/playfulness-design" rel="noopener">GitHub &#8599;</a>
+          <a href="#main">Back to top &#8593;</a>
+        </div>
+      </div>
+      <div>
+        <p>Updated November 12, 2025</p>
+        <p>&copy; 2025 Xinyi Cui</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
